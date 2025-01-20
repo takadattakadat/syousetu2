@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>マイ・ブック</title>
+    <link rel="stylesheet" href="styles.css">
+    
+</head>
+<body>
+
+    <!-- ヘッダー -->
+    <header id="my-book-header">
+        <h1>&nbsp;&nbsp;MyBookLog</h1>
+    </header>
+    
+    <!-- ナビゲーションバー -->
+    <nav id="tab-nav">
+        <ul>
+            <li><a href="index.html">ホーム</a></li>
+            <li><a href="my-books.html">マイ・ブック</a></li>
+            <li><a href="add-book.html">本を追加</a></li>
+            <li><a href="logout.html">ログアウト</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section class="book-list">
+            <h2>読んだ本</h2>
+            <div class="sort-options">
+                <div class="sort-options-left">
+                    <label for="search-input" class="search-label">検索:</label>
+                    <input type="text" id="search-input" placeholder="検索...">
+                </div>
+            <div class="sort-options-right">
+                <label for="rating-sort" class="sort-order-label">評価順:</label>
+                <select id="sort-order">
+                    <option value="asc">高い</option>
+                    <option value="desc">低い</option>
+                </select>
+            </div>
+            <div class="sort-options-right">
+                <label for="sort-order-date" class="sort-order-label">日付順:</label>
+                <select id="sort-order-date">
+                    <option value="newest">最新</option>
+                    <option value="oldest">古い</option>
+                </select>
+            </div>
+        </div>
+            <ul id="book-list"></ul>
+        </section>
+    </main>
+
+    <!-- ページネーションのエリアを追加 -->
+    <section class="pagination">
+        <ul id="pagination-list">
+            <li><a href="#" class="prev disabled">Previous</a></li>
+            <li><a href="#" data-page="1" class="active">1</a></li>
+            <li><a href="#" data-page="2">2</a></li>
+            <li><a href="#" data-page="3">3</a></li>
+            <li><a href="#" data-page="4">4</a></li>
+            <li><a href="#" data-page="5">5</a></li>
+            <li><a href="#" class="next" data-page="2">Next</a></li>
+        </ul>
+    </section>
+
+    <!-- モーダル -->
+    <div id="review-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>レビュー</h2>
+            <div id="modal-details"></div>
+        </div>
+    </div>
+    
+    <div id="delete-confirm-modal" class="modal">
+        <div class="modal-content">
+            <p>本を削除しますか？</p>
+            <button id="delete-confirm-yes" class="modal-btn yes-btn">はい</button>
+            <button id="delete-confirm-no" class="modal-btn no-btn">いいえ</button>
+        </div>
+    </div>
+
+
+    <div id="loading-screen" class="loading-screen">
+        <div class="spinner"></div>
+    </div>
+    
+
+    
+
+    <script src="my-books.js"></script>
+</body>
+</html>

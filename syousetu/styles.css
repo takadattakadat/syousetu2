@@ -1,0 +1,734 @@
+
+
+/* スクロールバーを常に表示する */
+html, body {
+    overflow: scroll; /* 常にスクロールバーを表示 */
+}
+
+/* 全体のbodyスタイル */
+body {
+    font-family: Arial, sans-serif; /* ページ全体のフォント設定 */
+    margin: 0; /* デフォルトのマージンを削除 */
+    padding: 0; /* デフォルトのパディングを削除 */
+    background-color: #fbfeff; /* 背景色をライトグレーに設定 */
+    min-height: 100vh; /* ビューポートの高さに合わせる */
+    box-sizing: border-box; /* パディングとボーダーを幅と高さに含める */
+    padding-bottom: 5rem; /* フッターの高さに合わせて下部のパディングを調整 */
+}
+
+
+#my-book-header {
+    background-color: #fbfeff; /* 背景色 */
+    color: #000000; /* テキスト色 */
+    padding: 0.5rem 1rem; /* 内側の余白を調整 */
+    text-align: left; /* 左揃えに変更 */
+    font-size: 0.9rem; /* フォントサイズを調整 */
+	
+    font-family: 'Anton', sans-serif;
+    position: relative; /* 親要素の位置を相対に設定 */
+    top: 3vh; /* フッターに近づけるために位置を調整 */
+}
+
+
+
+
+
+/* ナビゲーションバー */
+#tab-nav {
+    background-color: #fbfeff; /* 背景色 */
+    display: flex;
+    justify-content: flex-start; /* 左揃え */
+    padding: 1rem 1rem; /* 上下と左右の余白 */
+}
+
+#tab-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+#tab-nav li {
+    margin-right: 1rem; /* タブ間の間隔 */
+}
+
+#tab-nav a {
+    text-decoration: none; /* 下線を消す */
+    color: #333; /* テキストの色 */
+    padding: 0.5rem 1rem; /* 内側の余白 */
+    border-radius: 8px; /* 角を丸める */
+    transition: background-color 0.3s; /* ホバー時のアニメーション */
+}
+
+#tab-nav a:hover {
+    background-color: #e0e0e0; /* ホバー時の背景色 */
+}
+
+
+
+/* ナビゲーションメニューのスタイル */
+nav ul {
+    list-style: none; /* デフォルトのリストスタイルを削除 */
+    padding: 0; /* パディングを削除 */
+    margin: 0; /* マージンを削除 */
+}
+
+nav ul li {
+    display: inline; /* リストアイテムをインライン表示 */
+    margin: 0 10px; /* リストアイテム間の間隔 */
+}
+
+nav ul li a {
+    color: #fff; /* リンクの文字色を白に設定 */
+    text-decoration: none; /* リンクの下線を削除 */
+}
+
+/* メインコンテンツのスタイル */
+main {
+    padding: 1rem; /* メインコンテンツの内側の余白 */
+    max-width: 900px; /* 最大幅を800pxに制限 */
+    margin: 0 auto; /* メインコンテンツを水平に中央揃え */
+}
+
+/* マイ・ブック内の書籍タイトルのスタイル */
+#book-list h3 {
+    font-size: 1.5em; /* フォントサイズを大きくする */
+    margin: 0; /* マージンをリセット */
+    padding: 0; /* パディングをリセット */
+    font-weight: bold; /* 太字にする */
+}
+
+
+/* 本のリストのスタイル */
+.book-list ul {
+    list-style: none; /* デフォルトのリストスタイルを削除 */
+    padding: 0; /* パディングを削除 */
+    margin: 0; /* マージンを削除 */
+}
+
+.book-list ul li {
+    background: #fff; /* 白い背景色 */
+    border: 1px solid #ddd; /* ライトグレーのボーダー */
+    margin-bottom: 10px; /* リストアイテム間の間隔 */
+    padding: 20px; /* 内側の余白 */
+    border-radius: 5px; /* 角を丸める */
+    position: relative; /* 相対位置 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* 立体的な影 */
+}
+
+.book-list ul li .delete-button {
+    position: absolute; /* 絶対位置 */
+    top: 10px;
+    right: 10px;
+    background: none; /* 背景を削除 */
+    border: none; /* ボーダーなし */
+    padding: 5px; /* 内側の余白 */
+    cursor: pointer; /* カーソルをポインタにする */
+    border-radius: 4px; /* 角を丸める */
+}
+
+.book-list ul li .delete-button svg {
+    width: 20px; /* アイコンの幅 */
+    height: 20px; /* アイコンの高さ */
+}
+
+
+
+
+
+
+.book-list ul li h3 {
+    margin-top: 0; /* 上のマージンを削除 */
+    margin-bottom: 5px; /* 下のマージンを設定 */
+}
+
+.book-list ul li p {
+    margin: 5px 0; /* 上下のマージンを設定 */
+}
+
+.book-list ul li .rating {
+    color: gold; /* 星の色を設定 */
+    font-size: 1.2rem; /* 星のサイズを設定 */
+}
+
+.book-list ul li .review {
+    margin-top: 10px; /* 上のマージンを設定 */
+    font-style: italic; /* イタリック体 */
+}
+
+
+
+/* 本の追加フォームのスタイル */
+.add-book form {
+    background: #fff; /* 白い背景色 */
+    border: 1px solid #ddd; /* ライトグレーのボーダー */
+    padding: 20px 30px; /* 上下の余白を20pxに、左右の余白を40pxに設定 */
+    border-radius: 10px; /* 角を丸める */
+    display: flex;
+    flex-direction: column; /* 縦に並べる */
+    align-items: flex-start; /* フォーム要素を左揃え */
+    position: relative; /* ボタンの位置を調整するために親要素を相対位置に設定 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* 立体的な影 */
+}
+
+
+/* ラベルのスタイル */
+.add-book form label {
+    display: block; /* ラベルをブロック要素に設定 */
+    margin-bottom: 1px; /* ラベル下のスペースを大きく */
+    font-weight: bold; /* ラベルを太字にする */
+    font-size: 1rem; /* ラベルの文字サイズを調整 */
+}
+
+/* 入力フィールドとテキストエリアのスタイル */
+.add-book form input,
+.add-book form textarea {
+    width: calc(100% - 16px); /* 幅をフルに近づけ、パディングを差し引く */
+    padding: 8px; /* 内側の余白 */
+    margin-bottom: 15px; /* 下部のスペースを広げる */
+    border: 1px solid #ddd; /* ライトグレーのボーダー */
+    border-radius: 4px; /* 角を丸める */
+    font-size: 1rem; /* フォントサイズを設定 */
+}
+
+/* テキストエリアのスタイル */
+.add-book form textarea {
+    height: 150px; /* テキストエリアの高さを150pxに設定 */
+    resize: vertical; /* 縦方向にリサイズ可能にする（必要に応じて） */
+}
+
+/* 「本を追加」ボタンのスタイル */
+.add-book form button {
+    background-color: #007BFF; /* 青色の背景 */
+    color: #fff; /* 白い文字色 */
+    border: none; /* ボーダーなし */
+    padding: 15px 30px; /* ボタン内の余白を広げる */
+    cursor: pointer; /* カーソルをポインタにする */
+    border-radius: 10px; /* 角を丸める */
+    transition: background-color 0.3s ease; /* 背景色が変わるときにアニメーション */
+    width: 100%; /* 幅を80%に設定して、フォームの中央に配置 */
+    margin-top: 20px; /* 上に少しスペースを追加 */
+    position: absolute;
+    bottom: -100px; /* フォームの下にボタンをはみ出させる */
+    left: 50%;
+    transform: translateX(-50%); /* 横中央に配置 */
+    font-size: 0.9rem; /* フォントサイズを少し小さくする */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* 立体的な影 */
+}
+
+/* ボタンのホバー効果 */
+.add-book form button:hover {
+    background-color: #0056b3; /* ホバー時に濃い青に変化 */
+    color: #ffffff; /* ホバー時でも文字色は白 */
+}
+
+/* フォームの位置調整 */
+.add-book form {
+    margin-bottom: 50px; /* 下部に余白を追加 */
+}
+
+
+
+/* レーティングシステムのスタイル */
+#rating {
+    display: flex;
+    flex-direction: row-reverse; /* 右から左に並べる */
+    justify-content: flex-start; /* 星を左に配置 */
+    margin-bottom: 10px;
+    width: fit-content; /* 必要な幅だけ使用する */
+}
+
+#rating input {
+    display: none; /* ラジオボタンを非表示 */
+}
+
+#rating label {
+    font-size: 2rem;
+    color: #ddd; /* 非選択状態の色 */
+    cursor: pointer;
+    margin-left: 5px; /* 左側にスペースを追加 */
+}
+
+/* 選択されたスターとその左側のスターもゴールドに */
+#rating input:checked ~ label {
+    color: gold;
+}
+
+#rating label:hover,
+#rating label:hover ~ label {
+    color: gold; /* ホバー時にスターを光らせる */
+}
+
+/* ラジオボタンがチェックされた時に全ての前のラベルを光らせる */
+#rating input:checked + label,
+#rating input:checked + label ~ label {
+    color: gold;
+}
+
+
+
+/* 通知メッセージのスタイル */
+#notification {
+    position: fixed;
+    top: 50%; /* 中央にするための位置調整 */
+    left: 50%;
+    transform: translate(-50%, -50%); /* 中央にするための位置調整 */
+    background-color: grey;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-size: 1rem;
+    display: none; /* 初期状態では非表示 */
+    z-index: 1000;
+    text-align: center;
+}
+
+/* 通知を表示する時に使うクラス */
+#notification.show {
+    display: block;
+}
+
+/* レビュー詳細ボタンのスタイル */
+.review-detail-button {
+    background-color: white;
+    color: #007bff;
+    border: 2px solid #ffffff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    position: absolute; /* 親要素を基準に配置 */
+    right: 10px; /* 右端から10px */
+    bottom: 16px; /* 下端から10px */
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.review-detail-button:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+
+/* 追加するスタイル: 親要素が相対位置であることを確認 */
+li {
+    position: relative;
+}
+
+
+
+/* 共通のモーダルスタイル */
+.modal {
+    display: none; /* 初期状態で非表示 */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4); /* 背景の暗いグラデーション */
+    overflow: auto;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 20% auto; /* モーダルが画面の中央から20%下に移動する */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* 既存のスタイルから引き継ぐ */
+    max-width: 700px; /* 80%から最大幅を少し広げる */
+    height: auto; /* 高さを自動調整に設定 */
+}
+
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+
+
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.modal-btn {
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 16px;
+    width: 48%; /* ボタンの幅を均等に */
+}
+
+.yes-btn {
+    background-color: #007bff; /* 青色 */
+    color: white;
+}
+
+.no-btn {
+    background-color: #6c757d; /* グレー */
+    color: white;
+}
+
+
+
+
+/* ここからログイン画面専用スタイル */
+#login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* View Heightの100%を使って画面を中央寄せ */
+    background-color: #f5f5f5; /* グレーを基調とした背景色 */
+}
+
+#login-page .login-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+
+#login-page .form-group {
+    margin-bottom: 15px;
+}
+
+#login-page label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#login-page input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#login-page button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#login-page button:hover {
+    background-color: #0056b3;
+}
+
+#login-page a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+#login-page a:hover {
+    text-decoration: underline;
+}
+
+
+
+
+
+
+/* ここからログアウト画面専用スタイル */
+#logout-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* View Heightの100%を使って画面を中央寄せ */
+    background-color: #f5f5f5; /* グレーを基調とした背景色 */
+}
+
+#logout-page .logout-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+
+#logout-page h2 {
+    margin-bottom: 15px;
+}
+
+#logout-page p {
+    margin-bottom: 20px;
+}
+
+#logout-page button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#logout-page button:hover {
+    background-color: #0056b3;
+}
+
+#logout-page a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+#logout-page a:hover {
+    text-decoration: underline;
+}
+
+
+
+/* ログイン画面のコンテナスタイル */
+.login-again-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    max-width: 90%; /* 最大幅を制限し、中央に配置するために使う */
+    text-align: center; /* テキストを中央に配置 */
+}
+
+.login-again-container h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.login-again-container p {
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* ボタンのスタイル */
+.btn-return-login button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* 立体的な影 */
+}
+
+.btn-return-login button:hover {
+    background-color: #0056b3;
+    color: white;
+}
+
+.btn-return-login a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.btn-return-login a:hover {
+    text-decoration: underline;
+}
+
+
+
+.book-list ul li .delete-button {
+    position: absolute; /* 絶対位置 */
+    top: 10px;
+    right: 10px;
+    background: none; /* 背景を削除 */
+    border: none; /* ボーダーなし */
+    padding: 5px; /* 内側の余白 */
+    cursor: pointer; /* カーソルをポインタにする */
+    border-radius: 4px; /* 角を丸める */
+}
+
+.book-list ul li .delete-button svg {
+    width: 20px; /* アイコンの幅 */
+    height: 20px; /* アイコンの高さ */
+}
+
+
+
+.book-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.book-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.book-header .read-date {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+
+.sort-options-right {
+    text-align: right; /* 右寄せ */
+    margin-bottom: 20px; /* 下の余白 */
+    margin-top: -40px; /* 少し上にズラす */
+    display: inline-block; /* 横に並べるためにブロックではなくインラインブロックにする */
+    margin-right: 20px; /* 右側に少しスペースを空ける */
+}
+
+.sort-options {
+    text-align: right; /* 親要素を右寄せ */
+}
+
+#sort-order, #sort-order-date {
+    padding: 8px;
+    font-size: 14px; /* 少し小さめに */
+    background-color: #fbfeff; /* ベースカラーを白に */
+    border: 2px solid #fbfeff; /* 枠線を青色に固定 */
+    border-radius: 6px; /* 角丸を少し小さめに */
+    color: #007BFF; /* 文字色を青に */
+    cursor: pointer;
+    transition: background-color 0.1s ease-in-out, transform 0.1s ease-in-out; /* ホバー時のアニメーション */
+}
+
+#sort-order:hover, #sort-order-date:hover {
+    background-color: #007BFF; /* ホバー時に濃い青に */
+    transform: scale(1.05); /* やや大きくする */
+    color: #ffffff; /* ホバー時の文字色を白に */
+}
+
+/* フォーカス時に黒い枠が表示されるのを抑える */
+#sort-order:focus, #sort-order-date:focus {
+    outline: none; /* フォーカス時のデフォルト枠を削除 */
+    border: 1px solid transparent; /* 黒い枠を透明にする */
+}
+
+
+/* ページネーションのスタイルを追加 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#pagination-list {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+}
+
+#pagination-list li {
+    margin: 0 5px;
+}
+
+#pagination-list a {
+    text-decoration: none;
+    color: #007BFF;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+#pagination-list a.active, #pagination-list a:hover {
+    color: #0056b3;
+    font-weight: bold;
+    background-color: #e0e0e0;
+}
+
+#pagination-list a.disabled {
+    color: #ccc;
+    pointer-events: none;
+}
+    
+
+
+
+.sort-options-left, .sort-options-right {
+    display: inline-block; /* 並行配置のために inline-block を使用 */
+    vertical-align: top;   /* 上端をそろえるために配置 */
+}
+
+
+/* ソートオプションのレイアウト調整 */
+.sort-options-left {
+    display: flex;
+    align-items: center;
+    margin-right: 20px; /* 右側の余白調整 */
+}
+
+.search-label {
+    margin-right: 10px;
+}
+
+#search-input {
+    padding: 5px;
+    width: 50%;
+    max-width: 400px; /* 最大幅を設定 */
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* 立体的な影 */
+}
+
+
+
+
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* 他の要素より高い値に設定 */
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 0.3s, opacity 0.3s linear;
+}
+
+.loading-screen.active {
+    visibility: visible;
+    opacity: 1;
+    transition-delay: 0s;
+}
+
+
+/* スピナーのスタイル */
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 6px solid #ccc;
+    border-top: 6px solid #007BFF; /* スピナーのアクセントカラー */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* スピナーのアニメーション */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
