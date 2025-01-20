@@ -1,6 +1,30 @@
 document.addEventListener('DOMContentLoaded', function () {
     const loadingScreen = document.getElementById('loading-screen'); // ローディング画面
 
+    // 通知メッセージを表示
+    function showNotification(message) {
+        const notification = document.getElementById('notification');
+        const overlay = document.getElementById('overlay');
+        notification.innerHTML = message;  // メッセージを表示
+        notification.classList.add('show');  // 通知を表示
+        overlay.classList.add('show');  // オーバーレイを表示
+    }
+
+    // 通知メッセージを閉じる
+    function closeNotification() {
+        const notification = document.getElementById('notification');
+        const overlay = document.getElementById('overlay');
+        notification.classList.add('hide');  // 非表示にするアニメーションを開始
+        overlay.classList.remove('show');  // オーバーレイを非表示にする
+
+        // アニメーションが終わった後に完全に非表示にする
+        setTimeout(function () {
+            notification.classList.remove('show');  // 通知を非表示
+            notification.classList.remove('hide');  // 非表示アニメーションをリセット
+        }, 500); // 0.5秒後に非表示
+    }
+
+    // フォーム送信時の処理
     document.getElementById('book-form').addEventListener('submit', function (event) {
         event.preventDefault();
 
@@ -21,14 +45,12 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('book-form').reset();
 
         // 通知メッセージの表示
-        const notification = document.getElementById('notification');
-        notification.textContent = '本が追加されました';
-        notification.classList.add('show');
+        showNotification('本が正常に追加されました！');
 
         // 3秒後に通知を非表示にする
         setTimeout(function () {
-            notification.classList.remove('show');
-        }, 1000);
+            closeNotification();
+        }, 2000); // 通知が2秒間表示されるように変更
     });
 
     // ページ遷移時にローディング画面を表示し、遷移を遅らせる
@@ -41,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
             loadingScreen.classList.add('active');
             setTimeout(() => {
                 window.location.href = href;
-            }, 1000);
+            }, 1000); // ローディング画面が1秒表示されるように設定
         });
     });
 
