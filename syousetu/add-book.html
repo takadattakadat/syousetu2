@@ -59,7 +59,12 @@
         </section>
 
         <!-- ここに通知用のdivを追加 -->
-        <div id="notification" class="hidden">本が追加されました</div>
+        <div id="overlay"></div> <!-- 背景グレーアウト -->
+        <div id="notification">
+        <p>本が正常に追加されました！</p>
+        <button onclick="closeNotification()">閉じる</button>
+        </div>
+
     </main>
 
     <div id="loading-screen" class="loading-screen">
