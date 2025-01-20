@@ -267,26 +267,82 @@ main {
 
 
 
+/* オーバーレイのスタイル */
+#overlay {
+    display: none; /* 初期状態では非表示 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* グレーアウト背景 */
+    z-index: 999; /* 通知の下に配置 */
+}
+
 /* 通知メッセージのスタイル */
 #notification {
     position: fixed;
-    top: 50%; /* 中央にするための位置調整 */
+    top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* 中央にするための位置調整 */
-    background-color: grey;
-    color: white;
-    padding: 15px 30px;
-    border-radius: 5px;
+    transform: translate(-50%, -50%);
+    background-color: #fff; /* 白い背景 */
+    color: #333; /* 通常の文字色 */
+    padding: 30px 60px;
+    border-radius: 20px;
     font-size: 1rem;
-    display: none; /* 初期状態では非表示 */
+    display: none;
     z-index: 1000;
     text-align: center;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* 影をつけて浮き上がる感じ */
+    opacity: 0;
+    animation: showNotification 0.5s ease-out forwards; /* 表示時のアニメーション */
+    max-width: 400px; /* 最大幅を設定 */
+    width: 100%; /* 幅を広めに設定 */
+    height: auto; /* 高さを自動調整 */
 }
 
 /* 通知を表示する時に使うクラス */
 #notification.show {
     display: block;
+    animation: showNotification 0.5s ease-out forwards; /* アニメーションで表示 */
 }
+
+/* オーバーレイを表示する時に使うクラス */
+#overlay.show {
+    display: block;
+}
+
+/* 通知のアニメーション（表示時） */
+@keyframes showNotification {
+    0% {
+        transform: translate(-50%, -40%); /* 上から浮き上がる */
+        opacity: 0;
+    }
+    100% {
+        transform: translate(-50%, -50%); /* 通常の位置に */
+        opacity: 1;
+    }
+}
+
+/* 通知のアニメーション（非表示時） */
+@keyframes hideNotification {
+    0% {
+        transform: translate(-50%, -50%); /* 通常位置 */
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -40%); /* 上に浮き上がる */
+        opacity: 0;
+    }
+}
+
+/* 通知を非表示にするときのアニメーション */
+#notification.hide {
+    animation: hideNotification 0.5s ease-out forwards; /* 非表示時のアニメーション */
+}
+
+
+
 
 /* レビュー詳細ボタンのスタイル */
 .review-detail-button {
