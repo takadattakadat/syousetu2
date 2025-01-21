@@ -89,13 +89,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const truncatedReview = book.review.length > 20 ? `${book.review.substring(0, 20)}...` : book.review;
         li.innerHTML = `
             <button class="delete-button" data-index="${globalIndex}">
-                <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3 10H17" stroke="#333" stroke-width="2"/>
-                </svg>
+                ✕
             </button>
             <div class="book-header">
                 <h3>${book.title}</h3>
-                <span class="read-date">${book.readDate}</span>
             </div>
             <p>${book.author}</p>
             <p>${'★'.repeat(book.rating)}${'☆'.repeat(5 - book.rating)}</p>
@@ -104,6 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
         `;
         bookList.appendChild(li);
     }
+    
     
 
     function attachReviewDetailEvents(sortedBooks) {
@@ -122,10 +120,26 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Invalid index or book not found:', index);
             return;
         }
-        const reviewHtml = book.review.replace(/\n/g, '<br>');
-        modalDetails.innerHTML = `<p>${reviewHtml}</p>`;
-        modal.style.display = 'block';
+        // 各入力データを取得
+        const title = book.title;
+        const author = book.author;
+        const readDate = book.readDate;
+        const rating = '★'.repeat(book.rating) + '☆'.repeat(5 - book.rating); // 評価を★で表示
+        const review = book.review.replace(/\n/g, '<br>'); // 改行を <br> に変換
+    
+        // モーダル内のHTMLを更新（左揃えで表示）
+        modalDetails.innerHTML = `
+            <h3>タイトル: ${title}</h3>
+            <p><strong>著者:</strong> ${author}</p>
+            <p><strong>読書日:</strong> ${readDate}</p>
+            <p><strong>評価:</strong> ${rating}</p>
+            <p><strong>レビュー:</strong></p>
+            <p>${review}</p>
+        `;
+        modal.style.display = 'block'; // モーダルを表示
     }
+    
+    
 
     closeModal.addEventListener('click', function () {
         modal.style.display = 'none';
@@ -146,19 +160,33 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    function showDeleteConfirmModal(index) {
-        deleteConfirmModal.style.display = 'block';
-        
-        deleteConfirmYes.onclick = function () {
-            // 削除処理を実行
-            deleteBook(index);
-            deleteConfirmModal.style.display = 'none';
-        };
-        
-        deleteConfirmNo.onclick = function () {
-            deleteConfirmModal.style.display = 'none';
-        };
-    }
+  // モーダルを表示する関数
+function showDeleteConfirmModal() {
+    deleteConfirmModal.classList.add('show');
+}
+
+// モーダルを非表示にする関数
+function hideDeleteConfirmModal() {
+    deleteConfirmModal.classList.remove('show');
+}
+
+// 初期状態でモーダルを非表示に設定
+deleteConfirmModal.classList.remove('show');
+
+// 「はい」ボタンで削除処理を実行し、モーダルを閉じる
+deleteConfirmYes.addEventListener('click', function () {
+    deleteBook(selectedIndex); // 選択された本を削除
+    hideDeleteConfirmModal(); // モーダルを閉じる
+});
+
+// 「いいえ」ボタンでモーダルを閉じる処理
+deleteConfirmNo.addEventListener('click', hideDeleteConfirmModal);
+
+// 「×」ボタンでレビュー詳細モーダルを閉じる
+closeModal.addEventListener('click', function () {
+    modal.style.display = 'none';
+});
+
 
     // ページ遷移時にローディング画面を表示し、遷移を遅らせる
     const links = document.querySelectorAll('a');
