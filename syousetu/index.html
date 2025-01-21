@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="ja">
+    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>マイブックログ</title>
     <link rel="stylesheet" href="styles.css">
+    <!-- Font AwesomeのCDNリンクを追加 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 
@@ -23,23 +26,57 @@
         </ul>
     </nav>
 
-    <main>
-        <section id="about-app">
-            <h2>マイブックログアプリについて</h2>
-            <p>マイブックログは、あなたの読書活動を記録し、簡単に管理するためのアプリです。本のレビューを追加し、評価をつけて記録することで、自分の読書履歴を一目で確認できます。</p>
+    <!-- メインコンテンツ -->
+    <main id="main-content">
+        <section id="hero-section">
+            <div class="hero-image">
+                <i class="fas fa-book-open fa-4x"></i> <!-- アイコンを追加 -->
+            </div>
+            <div class="hero-text">
+                <h1>MYBOOKLOGへようこそ！</h1>
+                <p>あなたの読書の旅を、ここから始めましょう。</p>
+                <a href="my-books.html" class="cta-button">マイ・ブックを見る</a>
+            </div>
         </section>
 
-        <section id="about-booklog">
-            <h2>マイブックログとは</h2>
-            <p>マイブックログは、シンプルで使いやすい読書管理アプリです。読んだ本や読みたい本を管理し、それぞれにレビューを追加できます。さらに、評価システムも搭載しており、星5段階でお気に入りの本を評価することができます。</p>
+
+
+
+        <section id="features">
+            <div class="feature-item">
+                <i class="fas fa-pencil-alt fa-3x"></i> <!-- アイコンを追加 -->
+                <h3>簡単なレビュー追加</h3>
+                <p>読んだ本の感想を記録して、評価を共有できます。</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-star fa-3x"></i> <!-- アイコンを追加 -->
+                <h3>星評価システム</h3>
+                <p>星5段階でお気に入りの本を評価し、自分の好みを記録しましょう。</p>
+            </div>
+            <div class="feature-item">
+                <i class="fas fa-bookmark fa-3x"></i> <!-- アイコンを追加 -->
+                <h3>読書履歴の管理</h3>
+                <p>過去に読んだ本を一目で確認できる便利な機能。</p>
+            </div>
         </section>
     </main>
 
+    <!-- 新しく追加するセクション -->
+    <section id="add-book-prompt" class="hero-section">
+        <div class="hero-image">
+            <i class="fas fa-plus-circle fa-4x"></i> <!-- アイコンを追加 -->
+        </div>
+        <div class="hero-text">
+            <h1>実際に本を追加してみよう！</h1>
+            <p>本を追加して、あなたの読書ログを管理しましょう。</p>
+            <a href="add-book.html" class="cta-button">本を追加</a>
+        </div>
+    </section>
+
+    <!-- ローディング画面 -->
     <div id="loading-screen" class="loading-screen">
         <div class="spinner"></div>
     </div>
-
-
 
 </body>
 </html>
