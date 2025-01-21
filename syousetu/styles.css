@@ -172,6 +172,8 @@ main {
     font-size: 1rem; /* フォントサイズを設定 */
     display: block; /* ブロック表示にする */
     margin-top: 5px; /* 上部の余白を追加 */
+    background: #fff;
+
 }
 
 /* 画像のプレビュー表示 */
@@ -220,12 +222,22 @@ main {
 .add-book form .form-group textarea {
     width: 70%; /* 入力フォームの幅を70%に設定 */
     padding: 10px; /* 内側の余白を調整 */
-    border: 1px solid #ddd;
+    border: 2px solid #ccc; /* 枠線を2pxにし、色を少し濃く */
     border-radius: 6px; /* 角を少し丸める */
     font-size: 1.1rem; /* フォントサイズを少し大きく */
     box-sizing: border-box; /* パディングを含む幅を計算する */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 軽い影を追加 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 軽い影を追加 */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* フォーカス時のアニメーション */
 }
+
+/* フォーカス時のスタイル */
+.add-book form .form-group input:focus,
+.add-book form .form-group textarea:focus {
+    border-color: #007BFF; /* フォーカス時に青い枠線に */
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* フォーカス時の影を強調 */
+    outline: none; /* デフォルトのアウトラインを削除 */
+}
+
 
 /* 添え文（smallタグ）のスタイル */
 .add-book form small {
@@ -323,6 +335,15 @@ main {
 
 
 
+.modal {
+    display: none; /* 初期状態では非表示 */
+}
+
+.modal.show {
+    display: block; /* クラス付与時に表示 */
+}
+
+
 /* オーバーレイのスタイル */
 #overlay {
     display: none; /* 初期状態では非表示 */
@@ -403,6 +424,56 @@ main {
 }
 
 
+/* モーダルのコンテンツ内のスタイル */
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+    transition: transform 0.3s ease, opacity 0.3s ease; /* アニメーション効果 */
+    opacity: 1;
+    width: 80%;
+    max-width: 600px; /* モーダルの最大幅 */
+}
+
+/* モーダル内のテキストのスタイル */
+.modal-content h3, .modal-content p {
+    text-align: left; /* 左揃え */
+    margin-bottom: 1rem; /* 各項目間にマージンを追加 */
+}
+
+/* 各項目のタイトル（強調） */
+.modal-content strong {
+    font-weight: bold;
+}
+
+/* モーダル内のレビュー内容のスタイル */
+.modal-content p {
+    font-size: 1rem; /* 文字サイズを調整 */
+    line-height: 1.5; /* 行間を広げて読みやすく */
+    color: #333; /* 通常のテキスト色 */
+}
+
+/* タイトルや著者などの内容のレイアウト調整 */
+.modal-content h3 {
+    font-size: 1.6rem; /* タイトルのフォントサイズを調整 */
+}
+
+/* 評価の表示 */
+.modal-content p strong {
+    margin-right: 5px; /* 評価タイトルと評価部分の間に少しスペース */
+}
+
+/* レビューの改行処理 */
+.modal-content p br {
+    margin-bottom: 0.5rem; /* 各改行間に余白を追加 */
+}
+
 
 
 
@@ -433,48 +504,72 @@ li {
 
 
 
-/* 共通のモーダルスタイル */
-.modal {
-    display: none; /* 初期状態で非表示 */
+/* オーバーレイのスタイル */
+.modal-overlay {
     position: fixed;
-    z-index: 1;
-    left: 0;
     top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.4); /* 背景の暗いグラデーション */
-    overflow: auto;
+    background: rgba(0, 0, 0, 0.5); /* 背景を半透明グレーに設定 */
+    z-index: 1; /* モーダルコンテンツの下に配置 */
+    display: none; /* 初期は非表示 */
 }
 
+/* モーダル全体の表示時のスタイル */
+.modal.show .modal-overlay {
+    display: block;
+}
+
+/* モーダルコンテンツのスタイル */
 .modal-content {
-    background-color: #fefefe;
-    margin: 20% auto; /* モーダルが画面の中央から20%下に移動する */
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%; /* 既存のスタイルから引き継ぐ */
-    max-width: 700px; /* 80%から最大幅を少し広げる */
-    height: auto; /* 高さを自動調整に設定 */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8); /* 初期は小さく縮小 */
+    background: #ffffff; /* モーダルの背景色 */
+    color: #333333; /* テキストカラー */
+    padding: 20px 30px; /* 内側の余白 */
+    border-radius: 10px; /* モーダルの角を丸く */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* 立体感のある影 */
+    z-index: 2;
+    opacity: 0; /* 初期は透明 */
+    animation: scaleUp 0.3s ease-out forwards; /* 拡大表示のアニメーション */
+    max-width: 500px; /* 最大幅を制限 */
+    width: 90%; /* モバイルにも対応する幅設定 */
+    text-align: center; /* コンテンツを中央揃え */
 }
 
+/* モーダルが表示されるときのアニメーション */
+@keyframes scaleUp {
+    0% {
+        transform: translate(-50%, -50%) scale(0.8); /* 縮小した状態 */
+        opacity: 0;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1); /* 拡大 */
+        opacity: 1;
+    }
+}
 
+/* クローズボタン */
 .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    color: #555555;
+    background: none;
+    border: none;
     cursor: pointer;
+    transition: color 0.3s ease;
 }
 
+.close:hover {
+    color: #ff0000; /* ホバー時のクローズボタンカラー */
+}
 
-
-
-
+/* ボタンのスタイル */
 .modal-buttons {
     display: flex;
     justify-content: space-around;
@@ -482,24 +577,27 @@ li {
 }
 
 .modal-btn {
-    padding: 10px 15px;
+    padding: 10px 20px;
     border: none;
     cursor: pointer;
-    border-radius: 3px;
-    font-size: 16px;
-    width: 48%; /* ボタンの幅を均等に */
+    border-radius: 5px;
+    font-size: 1rem;
+    width: 40%; /* ボタンの幅を調整 */
+    color: white;
+    text-align: center;
 }
 
 .yes-btn {
     background-color: #007bff; /* 青色 */
-    color: white;
 }
 
 .no-btn {
     background-color: #6c757d; /* グレー */
-    color: white;
 }
 
+.modal-btn:hover {
+    opacity: 0.8; /* ホバー時の効果 */
+}
 
 
 
@@ -1004,4 +1102,19 @@ li {
 #add-book-prompt .cta-button:hover {
     background-color: #0056b3; /* ホバー時の色 */
     transform: translateY(-2px); /* ボタンが浮くような演出 */
+}
+
+
+.delete-button {
+    background: none;
+    border: none;
+    font-size: 1rem; /* ✕のサイズ調整 */
+    color: #424242; /* 赤色に設定 */
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+}
+
+.delete-button:hover {
+    color: #020202; /* ホバー時に色を少し濃く */
 }
