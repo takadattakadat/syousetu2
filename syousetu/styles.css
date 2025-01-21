@@ -132,6 +132,13 @@ main {
     height: 20px; /* アイコンの高さ */
 }
 
+/* 添え文のスタイル */
+.add-book form small {
+    display: block; /* 改行を追加 */
+    margin-top: 5px; /* 上部に余白を追加 */
+    font-size: 0.9rem; /* 少し小さい文字サイズ */
+    color: #888; /* グレー色に設定 */
+}
 
 
 
@@ -157,76 +164,123 @@ main {
 }
 
 
-
-/* 本の追加フォームのスタイル */
-.add-book form {
-    background: #fff; /* 白い背景色 */
-    border: 1px solid #ddd; /* ライトグレーのボーダー */
-    padding: 20px 30px; /* 上下の余白を20pxに、左右の余白を40pxに設定 */
-    border-radius: 10px; /* 角を丸める */
-    display: flex;
-    flex-direction: column; /* 縦に並べる */
-    align-items: flex-start; /* フォーム要素を左揃え */
-    position: relative; /* ボタンの位置を調整するために親要素を相対位置に設定 */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* 立体的な影 */
-}
-
-
-/* ラベルのスタイル */
-.add-book form label {
-    display: block; /* ラベルをブロック要素に設定 */
-    margin-bottom: 1px; /* ラベル下のスペースを大きく */
-    font-weight: bold; /* ラベルを太字にする */
-    font-size: 1rem; /* ラベルの文字サイズを調整 */
-}
-
-/* 入力フィールドとテキストエリアのスタイル */
-.add-book form input,
-.add-book form textarea {
-    width: calc(100% - 16px); /* 幅をフルに近づけ、パディングを差し引く */
-    padding: 8px; /* 内側の余白 */
-    margin-bottom: 15px; /* 下部のスペースを広げる */
-    border: 1px solid #ddd; /* ライトグレーのボーダー */
+/* ファイル入力のスタイル */
+.add-book form input[type="file"] {
+    padding: 8px; /* 内側の余白を調整 */
+    border: 1px solid #ddd; /* ボーダーを設定 */
     border-radius: 4px; /* 角を丸める */
     font-size: 1rem; /* フォントサイズを設定 */
+    display: block; /* ブロック表示にする */
+    margin-top: 5px; /* 上部の余白を追加 */
+}
+
+/* 画像のプレビュー表示 */
+#image-preview {
+    margin-top: 10px;
+    max-width: 100%; /* 画像の最大幅を100%に設定 */
+    max-height: 200px; /* 高さを200pxに制限 */
+    object-fit: cover; /* 画像の比率を保ちながら収める */
+}
+
+
+
+
+
+/* フォーム全体のスタイル */
+.add-book form {
+    display: flex;
+    flex-direction: column; /* 縦に並べる */
+    gap: 10px; /* フォーム項目間のスペースを狭める */
+    width: 800px; /* フォームの幅を800pxに設定 */
+    margin: 30px auto; /* 上部に余白を追加して中央に配置 */
+    padding-top: 30px; /* 上部の余白を追加 */
+}
+
+/* 入力項目ごとのスタイル */
+.add-book form label {
+    font-size: 1.1rem; /* ラベルの文字サイズを少し大きく */
+    font-weight: bold;
+    color: #333;
+    display: inline-block; /* ラベルをインラインにして横並びにする */
+    width: 25%; /* ラベルの幅を25%に設定 */
+    text-align: left; /* ラベルのテキストを左揃え */
+    margin-right: 20px; /* ラベルと入力フィールドの間にスペース */
+}
+
+/* フォームの各入力グループのスタイル */
+.add-book form .form-group {
+    display: flex;
+    justify-content: flex-start; /* 左側にラベル、右側に入力フィールド */
+    align-items: center; /* 上下を揃える */
+    gap: 10px; /* ラベルと入力フィールドの間隔を狭める */
+}
+
+/* 入力フィールドのスタイル */
+.add-book form .form-group input,
+.add-book form .form-group textarea {
+    width: 70%; /* 入力フォームの幅を70%に設定 */
+    padding: 10px; /* 内側の余白を調整 */
+    border: 1px solid #ddd;
+    border-radius: 6px; /* 角を少し丸める */
+    font-size: 1.1rem; /* フォントサイズを少し大きく */
+    box-sizing: border-box; /* パディングを含む幅を計算する */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 軽い影を追加 */
+}
+
+/* 添え文（smallタグ）のスタイル */
+.add-book form small {
+    display: block; /* ブロック表示にして次の行に配置 */
+    margin-top: 3px; /* 上部に余白を追加 */
+    font-size: 0.9rem; /* 少し小さい文字サイズ */
+    color: #888; /* グレー色に設定 */
+    width: 100%; /* 幅を100%にして親要素の幅に合わせる */
+    text-align: right; /* 文字を右揃えにする */
+    margin-left: 0; /* 余計な左のマージンを削除 */
+}
+
+/* 評価のラジオボタンのスタイル */
+#rating {
+    display: flex;
+    gap: 3px; /* ラジオボタン間隔を狭く */
+    justify-content: flex-start; /* ラジオボタンの並びを左詰め */
 }
 
 /* テキストエリアのスタイル */
 .add-book form textarea {
-    height: 150px; /* テキストエリアの高さを150pxに設定 */
-    resize: vertical; /* 縦方向にリサイズ可能にする（必要に応じて） */
+    width: 70%; /* 入力フォームの幅を広げる */
+    height: 180px; /* テキストエリアの高さを増加 */
+    padding: 12px;
+    font-size: 1.1rem;
+    resize: vertical; /* 縦方向にリサイズ可能 */
+    border: 1px solid #ddd;
+    border-radius: 6px;
 }
 
 /* 「本を追加」ボタンのスタイル */
 .add-book form button {
-    background-color: #007BFF; /* 青色の背景 */
-    color: #fff; /* 白い文字色 */
-    border: none; /* ボーダーなし */
-    padding: 15px 30px; /* ボタン内の余白を広げる */
-    cursor: pointer; /* カーソルをポインタにする */
-    border-radius: 10px; /* 角を丸める */
-    transition: background-color 0.3s ease; /* 背景色が変わるときにアニメーション */
-    width: 100%; /* 幅を80%に設定して、フォームの中央に配置 */
-    margin-top: 20px; /* 上に少しスペースを追加 */
-    position: absolute;
-    bottom: -100px; /* フォームの下にボタンをはみ出させる */
-    left: 50%;
-    transform: translateX(-50%); /* 横中央に配置 */
-    font-size: 0.9rem; /* フォントサイズを少し小さくする */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* 立体的な影 */
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    font-size: 1.1rem;
+    margin-top: 50px; /* 上に少しスペースを追加 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 軽い影を追加 */
 }
 
-/* ボタンのホバー効果 */
 .add-book form button:hover {
-    background-color: #0056b3; /* ホバー時に濃い青に変化 */
-    color: #ffffff; /* ホバー時でも文字色は白 */
+    background-color: #0056b3;
 }
+
+
 
 /* フォームの位置調整 */
 .add-book form {
     margin-bottom: 50px; /* 下部に余白を追加 */
 }
-
 
 
 /* レーティングシステムのスタイル */
@@ -236,6 +290,7 @@ main {
     justify-content: flex-start; /* 星を左に配置 */
     margin-bottom: 10px;
     width: fit-content; /* 必要な幅だけ使用する */
+    gap: 1px; /* 星の間隔を詰める */
 }
 
 #rating input {
@@ -246,8 +301,9 @@ main {
     font-size: 2rem;
     color: #ddd; /* 非選択状態の色 */
     cursor: pointer;
-    margin-left: 5px; /* 左側にスペースを追加 */
+    margin-left: 0px; /* 左側のスペースを調整して間隔を詰める */
 }
+
 
 /* 選択されたスターとその左側のスターもゴールドに */
 #rating input:checked ~ label {
@@ -793,4 +849,159 @@ li {
     100% {
         transform: rotate(360deg);
     }
+}
+
+
+/* ヒーローセクションの修正 */
+#hero-section {
+    position: relative;
+    text-align: center;
+    color: #333; /* テキストを少し柔らかい黒に変更 */
+    padding: 3rem 1rem; /* 上下に余白を追加 */
+}
+
+/* ヒーローセクションのテキスト */
+.hero-text {
+    text-align: center; /* 中央揃え */
+    margin-top: 2rem; /* 上部に余白を追加 */
+}
+
+.hero-text h1 {
+    font-size: 2.5rem; /* フォントサイズを調整 */
+    margin-bottom: 1rem; /* 下部に余白を追加 */
+    color: #007BFF; /* ヘッダーカラーをブランドカラーに統一 */
+    font-weight: bold; /* 太字にする */
+}
+
+.hero-text p {
+    font-size: 1.1rem; /* 説明文のサイズを調整 */
+    color: #666; /* テキストを薄い黒にする */
+    margin-bottom: 2rem; /* 下部に余白を追加 */
+    line-height: 1.5; /* 読みやすさのために行間を広げる */
+}
+
+/* ボタンのスタイル */
+.cta-button {
+    background-color: #007BFF; /* ボタン背景色 */
+    color: white; /* テキスト色 */
+    padding: 1rem 2.5rem; /* ボタンサイズを調整 */
+    text-decoration: none; /* 下線を削除 */
+    border-radius: 8px; /* ボタンの角を丸める */
+    font-size: 1.2rem; /* フォントサイズを調整 */
+    font-weight: bold; /* 太字 */
+    transition: background-color 0.3s, transform 0.2s; /* ホバー時のアニメーション */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 軽い影を追加 */
+    margin-bottom: 2rem; /* ボタン下に余白を追加 */
+}
+
+.cta-button:hover {
+    background-color: #0056b3; /* ホバー時の色 */
+    transform: translateY(-2px); /* ボタンが浮くような演出 */
+}
+
+/* フィーチャーセクション */
+#features {
+    display: flex;
+    flex-wrap: wrap; /* フレックスアイテムを折り返す */
+    justify-content: center; /* 中央揃え */
+    gap: 2rem; /* アイテム間の余白を設定 */
+    padding: 1rem 0.2rem; /* 上下に余白を追加 */
+    background-color: #fbfeff; /* 白い背景 */
+
+}
+
+.feature-item {
+    flex: 1 1 250px; /* 最小幅250px、最大幅は均等 */
+    text-align: center;
+    padding: 1rem; /* 内側の余白 */
+    border-radius: 8px; /* 角を丸める */
+    background-color: #f7f9fc; /* 柔らかい背景色 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 軽い影を追加 */
+    transition: transform 0.2s; /* ホバー時のアニメーション */
+}
+
+.feature-item:hover {
+    transform: translateY(-5px); /* ホバー時に浮く演出 */
+}
+
+.feature-icon {
+    width: 80px; /* アイコンサイズを調整 */
+    height: 80px;
+    margin-bottom: 1rem; /* 下部に余白を追加 */
+}
+
+.feature-item h3 {
+    font-size: 1.4rem; /* タイトルのフォントサイズを調整 */
+    margin-bottom: 0.5rem; /* 下部に余白を追加 */
+    color: #007BFF; /* タイトルの色をブランドカラーに設定 */
+    font-weight: bold;
+}
+
+.feature-item p {
+    font-size: 1rem; /* テキストサイズを調整 */
+    color: #666; /* 薄い黒色 */
+    line-height: 1.5; /* 行間を広げる */
+}
+
+/* 新しいコンテンツのスタイル */
+#about-content {
+    text-align: center; /* 中央揃え */
+    padding: 2rem; /* 上下に余白 */
+}
+
+#about-content h2 {
+    font-size: 1.8rem; /* 少し大きめに */
+    margin-bottom: 1rem;
+    color: #007BFF; /* 青色に変更 */
+}
+
+#about-content p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: #333;
+}
+
+#add-book-prompt {
+    position: relative;
+    text-align: center;
+    color: #333; /* テキストを少し柔らかい黒に変更 */
+    background-color: #fbfeff; /* 背景色を柔らかいグレーに変更 */
+    padding: 3rem 1rem; /* 上下に余白を追加 */
+    margin-top: 1rem; /* ヒーローセクションとの間にスペースを追加 */
+}
+
+#add-book-prompt .hero-text {
+    text-align: center; /* 中央揃え */
+    margin-top: 2rem; /* 上部に余白を追加 */
+}
+
+#add-book-prompt .hero-text h1 {
+    font-size: 2.5rem; /* フォントサイズを調整 */
+    margin-bottom: 1rem; /* 下部に余白を追加 */
+    color: #007BFF; /* ヘッダーカラーをブランドカラーに統一 */
+    font-weight: bold; /* 太字にする */
+}
+
+#add-book-prompt .hero-text p {
+    font-size: 1.1rem; /* 説明文のサイズを調整 */
+    color: #666; /* テキストを薄い黒にする */
+    margin-bottom: 2rem; /* 下部に余白を追加 */
+    line-height: 1.5; /* 読みやすさのために行間を広げる */
+}
+
+#add-book-prompt .cta-button {
+    background-color: #007BFF; /* ボタン背景色 */
+    color: white; /* テキスト色 */
+    padding: 1rem 2.5rem; /* ボタンサイズを調整 */
+    text-decoration: none; /* 下線を削除 */
+    border-radius: 8px; /* ボタンの角を丸める */
+    font-size: 1.2rem; /* フォントサイズを調整 */
+    font-weight: bold; /* 太字 */
+    transition: background-color 0.3s, transform 0.2s; /* ホバー時のアニメーション */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 軽い影を追加 */
+}
+
+#add-book-prompt .cta-button:hover {
+    background-color: #0056b3; /* ホバー時の色 */
+    transform: translateY(-2px); /* ボタンが浮くような演出 */
 }
