@@ -67,6 +67,21 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    // 画像プレビュー用のJavaScript
+document.getElementById("image").addEventListener("change", function(event) {
+    const file = event.target.files[0];
+    const preview = document.getElementById("image-preview");
+
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            preview.src = e.target.result; // プレビュー画像を設定
+        };
+        reader.readAsDataURL(file); // ファイルを読み込む
+    }
+});
+
+
     window.addEventListener('load', function () {
         loadingScreen.classList.remove('active');
     });
