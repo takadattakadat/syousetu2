@@ -27,36 +27,61 @@
         <section class="add-book">
             <h2>新しい本を追加</h2>
             <form id="book-form">
-                <label for="title">タイトル：</label>
-                <input type="text" id="title" name="title" required>
-
-                <label for="author">著者：</label>
-                <input type="text" id="author" name="author" required>
-
-                <!-- 読書日を追加 -->
-                <label for="read-date">読書日：</label>
-                <input type="date" id="read-date" name="readDate" required>
-
-                <label for="rating">評価：</label>
-                <div id="rating">
-                    <input type="radio" id="star5" name="rating" value="5">
-                    <label for="star5">&#9733;</label>
-                    <input type="radio" id="star4" name="rating" value="4">
-                    <label for="star4">&#9733;</label>
-                    <input type="radio" id="star3" name="rating" value="3">
-                    <label for="star3">&#9733;</label>
-                    <input type="radio" id="star2" name="rating" value="2">
-                    <label for="star2">&#9733;</label>
-                    <input type="radio" id="star1" name="rating" value="1">
-                    <label for="star1">&#9733;</label>
+                <!-- 画像のアップロード -->
+                <div class="form-group">
+                    <label for="image">本の画像：</label>
+                    <input type="file" id="image" name="image" accept="image/*">
                 </div>
+                <small>本のカバー画像をアップロードしてください。</small>
 
-                <label for="review">レビュー:</label>
-                <textarea id="review" name="review"></textarea>
 
+                <div class="form-group">
+                    <label for="title">タイトル：</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+                <small>本の正式なタイトルを入力してください。</small>
+    
+                <div class="form-group">
+                    <label for="author">著者：</label>
+                    <input type="text" id="author" name="author" required>
+                </div>
+                <small>本の著者名を入力してください。</small>
+    
+                <div class="form-group">
+                    <label for="read-date">読書日：</label>
+                    <input type="date" id="read-date" name="readDate" required>
+                </div>
+                <small>読書した日を選んでください。</small>
+    
+                <div class="form-group">
+                    <label for="rating">評価：</label>
+                    <div id="rating">
+                        <input type="radio" id="star5" name="rating" value="5">
+                        <label for="star5">&#9733;</label>
+                        <input type="radio" id="star4" name="rating" value="4">
+                        <label for="star4">&#9733;</label>
+                        <input type="radio" id="star3" name="rating" value="3">
+                        <label for="star3">&#9733;</label>
+                        <input type="radio" id="star2" name="rating" value="2">
+                        <label for="star2">&#9733;</label>
+                        <input type="radio" id="star1" name="rating" value="1">
+                        <label for="star1">&#9733;</label>
+                    </div>
+                </div>
+                <small>1～5の星で評価してください。</small>
+    
+                <div class="form-group">
+                    <label for="review">レビュー：</label>
+                    <textarea id="review" name="review"></textarea>
+                </div>
+                <small>本の感想を記入してください。</small> 
+    
                 <button type="submit">本を追加</button>
             </form>
         </section>
+    </main>
+    
+    
 
         <!-- ここに通知用のdivを追加 -->
         <div id="overlay"></div> <!-- 背景グレーアウト -->
