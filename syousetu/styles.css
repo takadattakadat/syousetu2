@@ -96,6 +96,7 @@ body {
 .review-preview {
     font-size: 0.9rem;
     color: #666;
+    
 }
 
 .rating-stars {
@@ -103,7 +104,12 @@ body {
     color: gold; /* 星の色を金色にする */
 }
 
-
+.book-author {
+    color: #0056b3; /* 文字色 */
+    text-decoration: underline; /* 下線を付ける */
+    text-decoration-color: #0056b3; /* 下線の色を文字色と同じにする */
+    text-underline-offset: 2px; /* 下線とテキストの間隔を調整 */
+}
 
 
 
