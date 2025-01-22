@@ -956,12 +956,14 @@ li {
     text-align: center;
     color: #333; /* テキストを少し柔らかい黒に変更 */
     padding: 3rem 1rem; /* 上下に余白を追加 */
+    border-top: 1px solid #ddd; /* 上部に境界線を追加 */
 }
 
 /* ヒーローセクションのテキスト */
 .hero-text {
     text-align: center; /* 中央揃え */
     margin-top: 2rem; /* 上部に余白を追加 */
+    
 }
 
 .hero-text h1 {
@@ -1045,6 +1047,7 @@ li {
 #about-content {
     text-align: center; /* 中央揃え */
     padding: 2rem; /* 上下に余白 */
+    border-top: 1px solid #ddd; /* 上部に境界線を追加 */
 }
 
 #about-content h2 {
@@ -1118,3 +1121,5 @@ li {
 .delete-button:hover {
     color: #020202; /* ホバー時に色を少し濃く */
 }
+
+
