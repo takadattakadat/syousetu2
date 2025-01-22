@@ -1,103 +1,88 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>本を追加</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <!-- ヘッダー -->
-    <header id="my-book-header">
-        <h1>&nbsp;&nbsp;MyBookLog</h1>
-    </header>
-    
-    <!-- ナビゲーションバー -->
-    <nav id="tab-nav">
-        <ul>
-            <li><a href="index.html">ホーム</a></li>
-            <li><a href="my-books.html">マイ・ブック</a></li>
-            <li><a href="add-book.html">本を追加</a></li>
-            <li><a href="logout.html">ログアウト</a></li>
-        </ul>
-    </nav>
+document.addEventListener('DOMContentLoaded', function () {
+    const loadingScreen = document.getElementById('loading-screen'); // ローディング画面
+
+    // 通知メッセージを表示
+    function showNotification(message) {
+        const notification = document.getElementById('notification');
+        const overlay = document.getElementById('overlay');
+        notification.innerHTML = message;  // メッセージを表示
+        notification.classList.add('show');  // 通知を表示
+        overlay.classList.add('show');  // オーバーレイを表示
+    }
+
+    // 通知メッセージを閉じる
+    function closeNotification() {
+        const notification = document.getElementById('notification');
+        const overlay = document.getElementById('overlay');
+        notification.classList.add('hide');  // 非表示にするアニメーションを開始
+        overlay.classList.remove('show');  // オーバーレイを非表示にする
+
+        // アニメーションが終わった後に完全に非表示にする
+        setTimeout(function () {
+            notification.classList.remove('show');  // 通知を非表示
+            notification.classList.remove('hide');  // 非表示アニメーションをリセット
+        }, 500); // 0.5秒後に非表示
+    }
+
+    // フォーム送信時の処理
+    document.getElementById('book-form').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const title = document.getElementById('title').value;
+        const author = document.getElementById('author').value;
+        const rating = document.querySelector('input[name="rating"]:checked')?.value || '評価なし';
+        const review = document.getElementById('review').value;
+        const readDate = document.getElementById('read-date').value;
+
+        const book = { title, author, rating, review, readDate };
+
+        // ローカルストレージに保存
+        const savedBooks = JSON.parse(localStorage.getItem('books')) || [];
+        savedBooks.push(book);
+        localStorage.setItem('books', JSON.stringify(savedBooks));
+
+        // フォームをリセット
+        document.getElementById('book-form').reset();
+
+        // 通知メッセージの表示
+        showNotification('本が正常に追加されました！');
+
+        // 3秒後に通知を非表示にする
+        setTimeout(function () {
+            closeNotification();
+        }, 2000); // 通知が2秒間表示されるように変更
+    });
+
+    // ページ遷移時にローディング画面を表示し、遷移を遅らせる
+    const links = document.querySelectorAll('a');
+    links.forEach(link => {
+        link.addEventListener('click', function (e) {
+            const href = link.getAttribute('href');
+            if (!href || href === '#') return;
+            e.preventDefault();
+            loadingScreen.classList.add('active');
+            setTimeout(() => {
+                window.location.href = href;
+            }, 1000); // ローディング画面が1秒表示されるように設定
+        });
+    });
+
+    // 画像プレビュー用のJavaScript
+document.getElementById("image").addEventListener("change", function(event) {
+    const file = event.target.files[0];
+    const preview = document.getElementById("image-preview");
+
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            preview.src = e.target.result; // プレビュー画像を設定
+        };
+        reader.readAsDataURL(file); // ファイルを読み込む
+    }
+});
 
 
-    <main>
-        <section class="add-book">
-            <h2>新しい本を追加</h2>
-            <form id="book-form">
-                <!-- 画像のアップロード -->
-                <div class="form-group">
-                    <label for="image">本の画像：</label>
-                    <input type="file" id="image" name="image" accept="image/*">
-                    <!-- 画像プレビュー -->
-                    <img id="image-preview" src="" alt="画像プレビュー" style="display: none;">
-                </div>
-                <small>本のカバー画像をアップロードしてください。</small>
-
-
-                <div class="form-group">
-                    <label for="title">タイトル：</label>
-                    <input type="text" id="title" name="title" required>
-                </div>
-                <small>本の正式なタイトルを入力してください。</small>
-    
-                <div class="form-group">
-                    <label for="author">著者：</label>
-                    <input type="text" id="author" name="author" required>
-                </div>
-                <small>本の著者名を入力してください。</small>
-    
-                <div class="form-group">
-                    <label for="read-date">読書日：</label>
-                    <input type="date" id="read-date" name="readDate" required>
-                </div>
-                <small>読書した日を選んでください。</small>
-    
-                <div class="form-group">
-                    <label for="rating">評価：</label>
-                    <div id="rating">
-                        <input type="radio" id="star5" name="rating" value="5">
-                        <label for="star5">&#9733;</label>
-                        <input type="radio" id="star4" name="rating" value="4">
-                        <label for="star4">&#9733;</label>
-                        <input type="radio" id="star3" name="rating" value="3">
-                        <label for="star3">&#9733;</label>
-                        <input type="radio" id="star2" name="rating" value="2">
-                        <label for="star2">&#9733;</label>
-                        <input type="radio" id="star1" name="rating" value="1">
-                        <label for="star1">&#9733;</label>
-                    </div>
-                </div>
-                <small>1～5の星で評価してください。</small>
-    
-                <div class="form-group">
-                    <label for="review">レビュー：</label>
-                    <textarea id="review" name="review"></textarea>
-                </div>
-                <small>本の感想を記入してください。</small> 
-    
-                <button type="submit">本を追加</button>
-            </form>
-        </section>
-    </main>
-    
-    
-
-        <!-- ここに通知用のdivを追加 -->
-        <div id="overlay"></div> <!-- 背景グレーアウト -->
-        <div id="notification">
-        <p>本が正常に追加されました！</p>
-        <button onclick="closeNotification()">閉じる</button>
-        </div>
-
-    </main>
-
-    <div id="loading-screen" class="loading-screen">
-        <div class="spinner"></div>
-    </div>
-    
-    <script src="add-book.js"></script>
-</body>
-</html>
+    window.addEventListener('load', function () {
+        loadingScreen.classList.remove('active');
+    });
+});
