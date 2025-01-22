@@ -87,20 +87,30 @@ document.addEventListener('DOMContentLoaded', function () {
     function addBookToList(book, globalIndex, sortedBooks) {
         const li = document.createElement('li');
         const truncatedReview = book.review.length > 20 ? `${book.review.substring(0, 20)}...` : book.review;
+    
         li.innerHTML = `
-            <button class="delete-button" data-index="${globalIndex}">
-                ✕
-            </button>
-            <div class="book-header">
-                <h3>${book.title}</h3>
+            <div class="book-item">
+                <!-- 縦長の画像 -->
+                <div class="image-container">
+                    <img src="${book.image || 'placeholder.jpg'}" alt="Book Image" class="book-image">
+                </div>
+    
+                <!-- 本の情報 -->
+                <div class="book-details">
+                    <h3 class="book-title"> ${book.title}</h3>
+                    <p>${book.author}</p>
+                    <p>${book.readDate}</p>
+                    <p class="rating-stars">${'★'.repeat(book.rating)}${'☆'.repeat(5 - book.rating)}</p>
+                    <p class="review-preview">${truncatedReview}</p>
+                </div>
             </div>
-            <p>${book.author}</p>
-            <p>${'★'.repeat(book.rating)}${'☆'.repeat(5 - book.rating)}</p>
-            <p class="review-preview">${truncatedReview}</p>
-            <button class="review-detail-button" data-index="${globalIndex}">レビューを見る</button>
+            <button class="delete-button" data-index="${globalIndex}">✕</button>
         `;
         bookList.appendChild(li);
     }
+    
+    
+    
     
     
 
