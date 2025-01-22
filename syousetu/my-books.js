@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function addBookToList(book, globalIndex, sortedBooks) {
         const li = document.createElement('li');
-        const truncatedReview = book.review.length > 20 ? `${book.review.substring(0, 20)}...` : book.review;
+        const truncatedReview = book.review.length > 100 ? `${book.review.substring(0, 100)}...` : book.review;
     
         li.innerHTML = `
             <div class="book-item">
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <!-- 本の情報 -->
                 <div class="book-details">
                     <h3 class="book-title"> ${book.title}</h3>
-                    <p>${book.author}</p>
+                    <p class="book-author">${book.author}</p>
                     <p>${book.readDate}</p>
                     <p class="rating-stars">${'★'.repeat(book.rating)}${'☆'.repeat(5 - book.rating)}</p>
                     <p class="review-preview">${truncatedReview}</p>
