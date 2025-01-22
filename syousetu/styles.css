@@ -31,6 +31,81 @@ body {
 
 
 
+.book-list {
+    max-width: 800px; /* 横幅を最大600pxに制限 */
+    margin: 0 auto; /* 中央寄せ */
+}
+
+
+
+
+
+
+/* 親コンテナのスタイル */
+.book-item {
+    display: flex; /* 横並び配置 */
+    align-items: flex-start; /* 上揃え */
+    margin-bottom: 20px; /* 下に余白 */
+    padding: 10px; /* 内側の余白 */
+    border: 1px solid #fff; /* 枠線 */
+    border-radius: 8px; /* 角を丸める */
+    background-color: #fff; /* 背景色 */
+}
+
+/* 画像コンテナ */
+.image-container {
+    width: 100px; /* 幅を120pxに増やす */
+    height: 150px; /* 高さを180pxに増やす */
+    margin-right: 20px; /* 右側の余白 */
+    border: 1px solid #ccc; /* 枠線 */
+    border-radius: 8px; /* 角を丸める */
+    overflow: hidden; /* 枠を超える部分を隠す */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0; /* 背景色（画像がない場合の色） */
+}
+
+/* 画像スタイル */
+.book-image {
+    width: 100%; /* 横幅いっぱい */
+    height: 100%; /* 高さいっぱい */
+    object-fit: cover; /* 画像を枠内に収める */
+}
+
+
+/* 本の情報のスタイル */
+.book-details {
+    display: flex;
+    flex-direction: column; /* 縦並び配置 */
+}
+
+.book-details h3, .book-details p {
+    margin: 5px 0; /* 各項目の間隔 */
+}
+
+.book-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    font-size: 2rem; /* タイトルのフォントサイズを大きく */
+    margin: 0; /* マージンをリセット */
+    font-weight: bold; /* 太字にする */
+    color: #333; /* タイトルの色を設定（暗い色） */
+}
+
+.review-preview {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.rating-stars {
+    font-size: 1.5rem; /* 星の大きさを大きくする */
+    color: gold; /* 星の色を金色にする */
+}
+
+
+
+
 
 
 /* ナビゲーションバー */
@@ -90,32 +165,33 @@ main {
     margin: 0 auto; /* メインコンテンツを水平に中央揃え */
 }
 
-/* マイ・ブック内の書籍タイトルのスタイル */
-#book-list h3 {
-    font-size: 1.5em; /* フォントサイズを大きくする */
-    margin: 0; /* マージンをリセット */
-    padding: 0; /* パディングをリセット */
-    font-weight: bold; /* 太字にする */
-}
 
 
-/* 本のリストのスタイル */
+
+/* 本のリスト全体のスタイル */
 .book-list ul {
-    list-style: none; /* デフォルトのリストスタイルを削除 */
-    padding: 0; /* パディングを削除 */
-    margin: 0; /* マージンを削除 */
+    list-style: none; /* デフォルトの箇条書きマーカーを削除 */
+    padding: 0; /* 内側の余白を削除 */
+    margin: 20px auto; /* 上下に余白、中央寄せ */
+    max-width: 800px; /* リスト全体の幅を制限 */
 }
 
+/* 各リストアイテムのスタイル */
 .book-list ul li {
     background: #fff; /* 白い背景色 */
     border: 1px solid #ddd; /* ライトグレーのボーダー */
-    margin-bottom: 10px; /* リストアイテム間の間隔 */
+    margin-bottom: 40px; /* リストアイテム間の間隔 */
     padding: 20px; /* 内側の余白 */
     border-radius: 5px; /* 角を丸める */
     position: relative; /* 相対位置 */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* 立体的な影 */
 }
 
+.book-list ul li:last-child {
+    margin-bottom: 0; /* 最後のアイテムには余白を適用しない */
+}
+
+/* 削除ボタンのスタイル */
 .book-list ul li .delete-button {
     position: absolute; /* 絶対位置 */
     top: 10px;
@@ -131,6 +207,10 @@ main {
     width: 20px; /* アイコンの幅 */
     height: 20px; /* アイコンの高さ */
 }
+
+
+
+
 
 /* 添え文のスタイル */
 .add-book form small {
@@ -838,6 +918,9 @@ li {
 }
 
 
+
+
+
 /* ページネーションのスタイルを追加 */
 .pagination {
     display: flex;
@@ -1121,5 +1204,4 @@ li {
 .delete-button:hover {
     color: #020202; /* ホバー時に色を少し濃く */
 }
-
 
